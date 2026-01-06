@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sadhai Sadhai Timilai</title>
+    <style>
+        body {
+            background-color: #fff0f3; /* Initial soft pink */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            transition: background-color 3s ease; /* Smooth color change */
+        }
+
+        /* Gallery with different sizes and beautiful borders */
+        .gallery {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .photo {
+            background: white;
+            padding: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.5s ease;
+        }
+
+        /* Your Photo - Larger */
+        .pic1 {
+            width: 220px;
+            height: 300px;
+            border: 10px solid #ff4d6d;
+            transform: rotate(-6deg);
+        }
+
+        /* Her Photo - Smaller and elegant */
+        .pic2 {
+            width: 180px;
+            height: 250px;
+            border: 8px solid #c9184a;
+            transform: rotate(6deg);
+        }
+
+        img { width: 100%; height: 100%; object-fit: cover; }
+
+        .photo:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 10;
+        }
+
+        /* The Bouquet */
+        #bouquet {
+            font-size: 100px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            user-select: none;
+        }
+
+        #message {
+            color: #c9184a;
+            font-size: 2.8rem;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 2s ease;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            color: #ff4d6d;
+            font-size: 25px;
+            pointer-events: none;
+            animation: rise 5s linear forwards;
+        }
+
+        @keyframes rise {
+            to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery">
+        <div class="photo pic1"><img src="1.jpg" alt="You"></div>
+        <div class="photo pic2"><img src="2.jpg" alt="Her"></div>
+    </div>
+
+    <div id="bouquet" onclick="startSurprise()">💐</div>
+    <h1 id="message">for uh my tanisa... ❤️</h1>
+
+    <script>
+        function startSurprise() {
+            // 1. Change Background Color
+            document.body.style.backgroundColor = "#ffb3c1";
+
+            // 2. Change Bouquet to Rose
+            const b = document.getElementById('bouquet');
+            b.innerHTML = '🌹';
+            b.style.transform = 'scale(1.4)';
+
+            // 3. Show Message
+            const m = document.getElementById('message');
+            m.style.opacity = '1';
+            m.style.transform = 'translateY(0)';
+
+            // 4. Start Heart Animation
+            setInterval(createHeart, 300);
+
+            // Disable click after first touch
+            b.onclick = null;
+        }
+
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
